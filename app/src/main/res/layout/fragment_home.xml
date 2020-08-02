@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/headerLayout"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="Profile"
+                android:layout_marginTop="3dp"
+                android:textSize="26dp"
+                android:id="@+id/profileText"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:text="Sign Out"
+                android:id="@+id/signOutButtonId"
+                android:background="@drawable/login_button"
+                android:textColor="@android:color/white"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageId"
+                android:src="@drawable/profile"
+                android:layout_width="120dp"
+                android:layout_height="120dp">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/profileNameId"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="22dp"
+                android:text="Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/profileEmailId"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp"
+                android:text="Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

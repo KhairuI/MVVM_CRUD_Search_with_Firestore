@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.ListFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:orientation="vertical"
+           android:padding="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <androidx.appcompat.widget.AppCompatTextView
+               android:text="Contact List"
+               android:textSize="20dp"
+               android:layout_gravity="center_horizontal"
+               android:textColor="@android:color/black"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+
+           </androidx.appcompat.widget.AppCompatTextView>
+
+           <androidx.appcompat.widget.SearchView
+               android:layout_marginTop="5dp"
+               app:queryHint="Enter ID or Name"
+               android:id="@+id/searchViewId"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+           </androidx.appcompat.widget.SearchView>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:padding="5dp"
+               tools:listitem="@layout/single_contact"
+               android:id="@+id/recycleViewId"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+           </androidx.recyclerview.widget.RecyclerView>
+
+       </LinearLayout>
+
+   </RelativeLayout>
+
+</FrameLayout>
