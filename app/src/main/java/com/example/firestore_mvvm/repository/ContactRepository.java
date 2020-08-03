@@ -54,6 +54,7 @@ public class ContactRepository {
                         contactMap.put("contact_Image",uri.toString());
                         contactMap.put("contact_Phone",user.contactPhone);
                         contactMap.put("contact_Email",user.contactEmail);
+                        contactMap.put("contact_Search",user.contactId);
 
                         //now put this data in firebase....
                         firebaseFirestore.collection("ContactList").document(currentUser).collection("User")
@@ -127,11 +128,6 @@ public class ContactRepository {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        Map<String,String> updateMap= new HashMap<>();
-                        updateMap.put("contact_Name",user.contactName);
-                        updateMap.put("contact_Image",uri.toString());
-                        updateMap.put("contact_Phone",user.contactPhone);
-                        updateMap.put("contact_Email",user.contactEmail);
                         firebaseFirestore.collection("ContactList").document(currentUser).collection("User")
                                 .document(user.contactId)
                                 .update("contact_Name", user.contactName,"contact_Image",uri.toString(),"contact_Phone",user.contactPhone,
@@ -176,6 +172,36 @@ public class ContactRepository {
             }
         });
 
+    }
+
+    public MutableLiveData<List<ContactUser>> searchDataFirebase(String s){
+         final List<ContactUser> searchList= new ArrayList<>();
+         final MutableLiveData<List<ContactUser>> getSearchMutableLiveData= new MutableLiveData<>();
+        firebaseFirestore.collection("ContactList").document(currentUser).collection("User").whereEqualTo("contact_Search",s)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(DocumentSnapshot documentSnapshot: task.getResult()){
+                    String id= documentSnapshot.getString("contact_Id");
+                    String name= documentSnapshot.getString("contact_Name");
+                    String image= documentSnapshot.getString("contact_Image");
+                    String phone= documentSnapshot.getString("contact_Phone");
+                    String email= documentSnapshot.getString("contact_Email");
+                    ContactUser user= new ContactUser(id,name,image,phone,email);
+                    searchList.add(user);
+                }
+                getSearchMutableLiveData.setValue(searchList);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
+
+         return getSearchMutableLiveData;
     }
 
 }

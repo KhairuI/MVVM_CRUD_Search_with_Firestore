@@ -65,7 +65,33 @@ public class ListFragment extends Fragment implements ContactAdapter.ClickInterf
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                final AlertDialog dialogue= new SpotsDialog.Builder().setContext(getActivity()).setTheme(R.style.Custom).setCancelable(true).build();
+                dialogue.show();
+                contactViewModel.search(s);
+                contactViewModel.searchLiveData.observe(getActivity(), new Observer<List<ContactUser>>() {
+                    @Override
+                    public void onChanged(List<ContactUser> contactUsers) {
+                        dialogue.dismiss();
+                        userList= contactUsers;
+                        adapter.getContactList(userList);
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
     }
+
+
 
     private void setUpRecycle() {
         final AlertDialog dialogue= new SpotsDialog.Builder().setContext(getActivity()).setTheme(R.style.Custom).setCancelable(true).build();

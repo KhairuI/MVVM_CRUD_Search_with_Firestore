@@ -18,7 +18,7 @@ public class ContactViewModel extends AndroidViewModel {
     private ContactRepository repository;
     public LiveData<String> insertResultLiveData;
     public LiveData<List<ContactUser>> getContactLiveData;
-    //public LiveData<String> updateResultLiveData;
+    public LiveData<List<ContactUser>> searchLiveData;
     public ContactViewModel(@NonNull Application application) {
         super(application);
         repository= new ContactRepository();
@@ -39,5 +39,8 @@ public class ContactViewModel extends AndroidViewModel {
     public void delete(String id){
         repository.deleteDataFirebase(id);
 
+    }
+    public void search(String s){
+        searchLiveData= repository.searchDataFirebase(s);
     }
 }

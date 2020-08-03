@@ -79,7 +79,7 @@ public class UpdateDialogue extends DialogFragment {
                 String phone= phoneEditText.getEditableText().toString();
                 String email= emailEditText.getEditableText().toString();
                 ContactUser user1= new ContactUser(id,name,image,phone,email);
-                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(email) && updateImageUri != null){
+                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(email)){
                     updateData(user1);
                 }
                 else {
