@@ -2,6 +2,9 @@
 # Project Over View
 ![MVVMFirebase](https://user-images.githubusercontent.com/48696824/89740711-f5b91900-daac-11ea-92e5-ee6d841062fa.jpg)
 
+# Project Structure
+![mvvm](https://user-images.githubusercontent.com/48696824/89740928-16826e00-daaf-11ea-88f9-62e505a077f5.PNG)
+
 # Using Component 
 01. Architecture Component: MVVM
 02. View Model
@@ -18,3 +21,7 @@
 06. Update Data
 07. Delete Data
 08. Firebase Search
+
+# Related Project
+MVVM_With_Room_SQLite: https://github.com/KhairuI/MVVM_With_Room_SQLite
+MVVM_With_Volly: https://github.com/KhairuI/MVVM_With_Volly
