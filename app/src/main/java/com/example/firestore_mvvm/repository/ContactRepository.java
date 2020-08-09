@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.firestore_mvvm.model.ContactUser;
+import com.example.firestore_mvvm.model.UpdateUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,20 +29,17 @@ import java.util.Map;
 public class ContactRepository {
 
     private FirebaseAuth firebaseAuth= FirebaseAuth.getInstance();
-    String currentUser= firebaseAuth.getCurrentUser().getUid();
+
     private StorageReference storageReference= FirebaseStorage.getInstance().getReference();
     private FirebaseFirestore firebaseFirestore= FirebaseFirestore.getInstance();
 
 
-    public MutableLiveData<String> insertContactFirebase(final ContactUser user, Bitmap bit){
+    public MutableLiveData<String> insertContactFirebase(final ContactUser user, Uri uri){
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-        byte[] data = baos.toByteArray();
-
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
         final MutableLiveData<String> insertResultLiveData= new MutableLiveData<>();
         final StorageReference image_path= storageReference.child("profile_image").child(currentUser).child(user.contactId+".jpg");
-        image_path.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        image_path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -85,6 +83,7 @@ public class ContactRepository {
     }
 
     public MutableLiveData<List<ContactUser>> getDataFromFireStore(){
+        String currentUser= firebaseAuth.getCurrentUser().getUid();
        final List<ContactUser> contactList= new ArrayList<>();
         final MutableLiveData<List<ContactUser>> getFireStoreMutableLiveData= new MutableLiveData<>();
         firebaseFirestore.collection("ContactList").document(currentUser).collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -114,50 +113,57 @@ public class ContactRepository {
         return getFireStoreMutableLiveData;
     }
 
-    public void updateDataFirebase(final ContactUser user, Bitmap bit){
-      //  final MutableLiveData<String> updateMutableLiveData= new MutableLiveData<>();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-        byte[] data = baos.toByteArray();
-
-        final StorageReference image_path= storageReference.child("profile_image").child(currentUser).child(user.contactId+".jpg");
-        image_path.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+    //update Image
+    public void updateImageFirebase(final String id, Uri uri){
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
+        final StorageReference image_path= storageReference.child("profile_image").child(currentUser).child(id+".jpg");
+        image_path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+                        firebaseFirestore.collection("ContactList").document(currentUser)
+                                .collection("User").document(id).update("contact_Image",uri.toString())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
 
-                        firebaseFirestore.collection("ContactList").document(currentUser).collection("User")
-                                .document(user.contactId)
-                                .update("contact_Name", user.contactName,"contact_Image",uri.toString(),"contact_Phone",user.contactPhone,
-                                        "contact_Email",user.contactEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                            }
-                        });
-
+                                    }
+                                });
                     }
                 });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    //update Info
+
+    public void updateInfoFirebase(UpdateUser user){
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
+        firebaseFirestore.collection("ContactList").document(currentUser)
+                .collection("User").document(user.contactId)
+                .update("contact_Name",user.contactName,
+                        "contact_Phone",user.contactPhone,"contact_Email",user.contactEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-
             }
         });
-
     }
 
     public void deleteDataFirebase(final String id){
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
         StorageReference deleteImage= storageReference.child("profile_image").child(currentUser).child(id+".jpg");
         deleteImage.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -175,6 +181,7 @@ public class ContactRepository {
     }
 
     public MutableLiveData<List<ContactUser>> searchDataFirebase(String s){
+        String currentUser= firebaseAuth.getCurrentUser().getUid();
          final List<ContactUser> searchList= new ArrayList<>();
          final MutableLiveData<List<ContactUser>> getSearchMutableLiveData= new MutableLiveData<>();
         firebaseFirestore.collection("ContactList").document(currentUser).collection("User").whereEqualTo("contact_Search",s)

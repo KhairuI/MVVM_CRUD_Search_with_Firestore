@@ -78,6 +78,6 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //compress image
-    implementation 'id.zelory:compressor:3.0.0'
+    implementation 'id.zelory:compressor:2.1.0'
 
 }

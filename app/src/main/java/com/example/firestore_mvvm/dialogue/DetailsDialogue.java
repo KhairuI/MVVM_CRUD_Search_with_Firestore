@@ -26,12 +26,11 @@ public class DetailsDialogue extends DialogFragment {
     private AppCompatTextView idTextView,nameTextView,phoneTextView,emailTextView;
     private List<ContactUser> userList;
     private int position;
-    private ListFragment listFragment;
 
-    public DetailsDialogue(List<ContactUser> userList, int position, ListFragment listFragment) {
+
+    public DetailsDialogue(List<ContactUser> userList, int position) {
         this.userList = userList;
         this.position = position;
-        this.listFragment = listFragment;
     }
 
     @NonNull
@@ -41,35 +40,12 @@ public class DetailsDialogue extends DialogFragment {
         AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
         LayoutInflater inflater= getActivity().getLayoutInflater();
         View view= inflater.inflate(R.layout.details_dialogue,null);
-        builder.setView(view).setTitle("Contact Details").setIcon(R.drawable.ic_view).setCancelable(true).setNegativeButton("Close", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Contact Details").setIcon(R.drawable.ic_view).setCancelable(true)
+                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-            }
-        }).setPositiveButton("Update", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String id= userList.get(position).getContactId();
-                String name= userList.get(position).getContactName();
-                String image= userList.get(position).getContactImage();
-                String phone= userList.get(position).getContactPhone();
-                String email= userList.get(position).getContactEmail();
-                ContactUser user= new ContactUser(id,name,image,phone,email);
 
-                UpdateDialogue updateDialogue= new UpdateDialogue(user);
-                updateDialogue.show(getParentFragmentManager(),"Update Fragment");
-
-                /*//sent in the insert fragment....
-                FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                InsertFragment fragment= new InsertFragment();
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("my_object",user);
-                fragment.setArguments(bundle);
-                ft.replace(R.id.insertFragment,fragment);
-                ft.addToBackStack(null);
-                ft.commit();*/
             }
         });
 

@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         signInViewModel= new ViewModelProvider(getActivity(),ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(SignInViewModel.class);
         signInViewModel.collectUserInfo();
-        signInViewModel.collectUserInfoLiveData.observe(getActivity(), new Observer<SignInUser>() {
+        signInViewModel.collectUserInfoLiveData.observe(getViewLifecycleOwner(), new Observer<SignInUser>() {
             @Override
             public void onChanged(SignInUser signInUser) {
                 setProfile(signInUser);
@@ -98,10 +98,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void setProfile(SignInUser signInUser) {
-        Glide.with(getActivity()).load(signInUser.getImageUrl())
-                .centerCrop().placeholder(R.drawable.profile).into(profileImageView);
-        nameTextView.setText(signInUser.getName());
-        emailTextView.setText(signInUser.getEmail());
+        if(signInUser != null){
+            Glide.with(requireActivity()).load(signInUser.getImageUrl())
+                    .centerCrop().placeholder(R.drawable.profile).into(profileImageView);
+            nameTextView.setText(signInUser.getName());
+            emailTextView.setText(signInUser.getEmail());
+        }
+
     }
 
     private void signOut() {

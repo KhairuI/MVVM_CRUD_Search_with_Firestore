@@ -23,14 +23,16 @@
 
         </androidx.appcompat.widget.AppCompatTextView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="135dp"
-            android:id="@+id/updateImageId"
-            android:src="@drawable/profile"
-            android:layout_height="135dp">
+      <androidx.appcompat.widget.AppCompatButton
+          android:layout_marginTop="15dp"
+          android:text="Update Image"
+          android:id="@+id/updateImageButtonId"
+          android:background="@drawable/login_button"
+          android:textColor="@android:color/white"
+          android:layout_width="150dp"
+          android:layout_height="wrap_content">
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+      </androidx.appcompat.widget.AppCompatButton>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -86,6 +88,18 @@
             </androidx.appcompat.widget.AppCompatEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/updateInfoButtonId"
+            android:text="Update Information"
+            android:background="@drawable/login_button"
+            android:textColor="@android:color/white"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.AppCompatButton>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -51,7 +51,7 @@ public class InsertFragment extends Fragment {
     private AppCompatEditText insertEmailEditText;
     private AppCompatTextView headerTextView;
     private AppCompatButton saveButton;
-   private Bitmap insertImageUri= null;
+   private Uri insertImageUri= null;
     private static final int CAPTURE_PICCODE = 989;
     //view Model
     private ContactViewModel contactViewModel;
@@ -147,8 +147,12 @@ public class InsertFragment extends Fragment {
 
     private void imagePick() {
 
-        Intent intent= new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, CAPTURE_PICCODE);
+        /*Intent intent= new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, CAPTURE_PICCODE);*/
+        CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setAspectRatio(1,1)
+                .start(getContext(),this);
     }
 
     //generate a random digit.........
@@ -170,7 +174,17 @@ public class InsertFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode== getActivity().RESULT_OK){
+        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE ){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if(resultCode==getActivity().RESULT_OK){
+                insertImageUri= result.getUri();
+                insertImageView.setImageURI(insertImageUri);
+            }
+            else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+       /* if(resultCode== getActivity().RESULT_OK){
             if(requestCode== CAPTURE_PICCODE){
                 Uri returnUri = data.getData();
                 Bitmap bitmapImage = null;
@@ -188,6 +202,6 @@ public class InsertFragment extends Fragment {
                     insertImageView.setImageBitmap(resize);
 
             }
-        }
+        }*/
     }
 }
