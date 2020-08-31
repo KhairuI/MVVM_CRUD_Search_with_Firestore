@@ -27,6 +27,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.firestore_mvvm.R;
@@ -46,11 +48,11 @@ import dmax.dialog.SpotsDialog;
 public class InsertFragment extends Fragment {
 
     private CircleImageView insertImageView;
-    private AppCompatEditText insertNameEditText;
-    private AppCompatEditText insertPhoneEditText;
-    private AppCompatEditText insertEmailEditText;
-    private AppCompatTextView headerTextView;
-    private AppCompatButton saveButton;
+    private EditText insertNameEditText;
+    private EditText insertPhoneEditText;
+    private EditText insertEmailEditText;
+
+    private Button saveButton;
    private Uri insertImageUri= null;
     private static final int CAPTURE_PICCODE = 989;
     //view Model
@@ -77,7 +79,6 @@ public class InsertFragment extends Fragment {
         insertNameEditText= view.findViewById(R.id.insertNameId);
         insertPhoneEditText= view.findViewById(R.id.insertPhoneId);
         insertEmailEditText= view.findViewById(R.id.insertEmailId);
-        headerTextView= view.findViewById(R.id.headerTextId);
         saveButton= view.findViewById(R.id.saveButtonId);
         insertImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,9 +91,9 @@ public class InsertFragment extends Fragment {
             public void onClick(View v) {
 
                 String id= randomDigit();
-                String name= insertNameEditText.getEditableText().toString();
-                String phone= insertPhoneEditText.getEditableText().toString();
-                String email= insertEmailEditText.getEditableText().toString();
+                String name= insertNameEditText.getText().toString();
+                String phone= insertPhoneEditText.getText().toString();
+                String email= insertEmailEditText.getText().toString();
                 if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(email) && insertImageUri != null){
                     //show spots dialogue here.....
                     final AlertDialog dialogue= new SpotsDialog.Builder().setContext(getActivity()).setTheme(R.style.Custom).setCancelable(true).build();

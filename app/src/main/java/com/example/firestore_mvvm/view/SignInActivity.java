@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.firestore_mvvm.R;
@@ -27,7 +28,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
-    private AppCompatButton signInButton;
+    private Button signInButton;
 
     //private FirebaseAuth mAuth;
     private SignInViewModel signInViewModel;
@@ -37,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        SignInViewModel();
+        intiSignInViewModel();
         signInMethod();
         //find section....
         signInButton= findViewById(R.id.signInButtonId);
@@ -50,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    private void SignInViewModel() {
+    private void intiSignInViewModel() {
 
         signInViewModel= new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
                 getInstance(this.getApplication())).get(SignInViewModel.class);

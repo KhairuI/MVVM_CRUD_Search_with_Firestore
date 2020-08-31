@@ -3,6 +3,7 @@ package com.example.firestore_mvvm.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -57,8 +58,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private CircleImageView circleImageView;
-        private AppCompatTextView contactId;
-        private AppCompatTextView contactName;
+        private TextView contactId;
+        private TextView contactName;
 
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);

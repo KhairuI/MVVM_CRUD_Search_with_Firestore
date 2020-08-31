@@ -9,7 +9,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-     <androidx.appcompat.widget.LinearLayoutCompat
+     <LinearLayout
          android:layout_width="match_parent"
          android:id="@+id/insertHeader"
          android:layout_marginTop="15dp"
@@ -17,7 +17,7 @@
          android:orientation="vertical"
          android:layout_height="wrap_content">
 
-         <androidx.appcompat.widget.AppCompatTextView
+         <TextView
              android:text="Add People"
              android:textSize="25dp"
              android:id="@+id/headerTextId"
@@ -25,11 +25,11 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content">
 
-         </androidx.appcompat.widget.AppCompatTextView>
+         </TextView>
 
-     </androidx.appcompat.widget.LinearLayoutCompat>
+     </LinearLayout>
 
-       <androidx.appcompat.widget.LinearLayoutCompat
+       <LinearLayout
            android:layout_width="match_parent"
            android:layout_centerInParent="true"
            android:gravity="center"
@@ -50,14 +50,14 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
 
-               <androidx.appcompat.widget.AppCompatEditText
+               <EditText
                    android:id="@+id/insertNameId"
                    android:inputType="text"
                    android:hint="Enter Your Name"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
 
-               </androidx.appcompat.widget.AppCompatEditText>
+               </EditText>
 
            </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,14 +66,14 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
 
-               <androidx.appcompat.widget.AppCompatEditText
+               <EditText
                    android:id="@+id/insertPhoneId"
                    android:inputType="number"
                    android:hint="Enter Your Phone"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
 
-               </androidx.appcompat.widget.AppCompatEditText>
+               </EditText>
 
            </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,18 +82,18 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
 
-               <androidx.appcompat.widget.AppCompatEditText
+               <EditText
                    android:id="@+id/insertEmailId"
                    android:inputType="textEmailAddress"
                    android:hint="Enter Your Email"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
 
-               </androidx.appcompat.widget.AppCompatEditText>
+               </EditText>
 
            </com.google.android.material.textfield.TextInputLayout>
 
-           <androidx.appcompat.widget.AppCompatButton
+           <Button
                android:layout_marginTop="10dp"
                android:text="Save"
                android:background="@drawable/login_button"
@@ -102,12 +102,12 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
 
-           </androidx.appcompat.widget.AppCompatButton>
+           </Button>
 
 
 
 
-       </androidx.appcompat.widget.LinearLayoutCompat>
+       </LinearLayout>
 
 
    </RelativeLayout>

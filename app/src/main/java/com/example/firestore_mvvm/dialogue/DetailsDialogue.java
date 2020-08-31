@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailsDialogue extends DialogFragment {
     private CircleImageView circleImageView;
-    private AppCompatTextView idTextView,nameTextView,phoneTextView,emailTextView;
+    private TextView idTextView,nameTextView,phoneTextView,emailTextView;
     private List<ContactUser> userList;
     private int position;
 

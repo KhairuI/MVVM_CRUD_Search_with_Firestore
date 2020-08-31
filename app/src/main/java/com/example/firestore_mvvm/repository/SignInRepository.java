@@ -41,7 +41,7 @@ public class SignInRepository {
                               //collect user info  from authentication..........
 
     public MutableLiveData<SignInUser> collectUserData(){
-        MutableLiveData<SignInUser> collectUserLiveData= new MutableLiveData<>();
+        MutableLiveData<SignInUser> collectUserMutableLiveData= new MutableLiveData<>();
 
         FirebaseUser currentUser= firebaseAuth.getCurrentUser();
         if(currentUser !=null){
@@ -51,9 +51,9 @@ public class SignInRepository {
             Uri getImageUrl= currentUser.getPhotoUrl();
             String imageUrl= getImageUrl.toString();
             SignInUser user= new SignInUser(uId,name,email,imageUrl);
-            collectUserLiveData.setValue(user);
+            collectUserMutableLiveData.setValue(user);
         }
-        return collectUserLiveData;
+        return collectUserMutableLiveData;
     }
 
                                             //firebase sign in with google

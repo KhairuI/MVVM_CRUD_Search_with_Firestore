@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -30,9 +32,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
 
-    private AppCompatButton signOutButton;
+    private Button signOutButton;
     private CircleImageView profileImageView;
-    private AppCompatTextView nameTextView,emailTextView;
+    private TextView nameTextView,emailTextView;
    // private SignInUser signInUser;
    private SignInViewModel signInViewModel;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -99,7 +101,7 @@ public class HomeFragment extends Fragment {
 
     private void setProfile(SignInUser signInUser) {
         if(signInUser != null){
-            Glide.with(requireActivity()).load(signInUser.getImageUrl())
+            Glide.with(getActivity()).load(signInUser.getImageUrl())
                     .centerCrop().placeholder(R.drawable.profile).into(profileImageView);
             nameTextView.setText(signInUser.getName());
             emailTextView.setText(signInUser.getEmail());

@@ -23,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,9 +51,9 @@ public class ListFragment extends Fragment implements ContactAdapter.ClickInterf
     private ContactAdapter adapter;
     private List<ContactUser> userList= new ArrayList<>();
 
-    private AppCompatButton updateImageButton,updateInfoButton;
-    private AppCompatTextView idTextView;
-    private AppCompatEditText nameEditText,phoneEditText,emailEditText;
+    private Button updateImageButton,updateInfoButton;
+    private TextView idTextView;
+    private EditText nameEditText,phoneEditText,emailEditText;
     private Uri updateUri= null;
     int userPosition;
 
@@ -217,9 +220,9 @@ public class ListFragment extends Fragment implements ContactAdapter.ClickInterf
             @Override
             public void onClick(View v) {
                 String id= userList.get(position).getContactId();
-                String name= nameEditText.getEditableText().toString();
-                String phone= phoneEditText.getEditableText().toString();
-                String email= emailEditText.getEditableText().toString();
+                String name= nameEditText.getText().toString();
+                String phone= phoneEditText.getText().toString();
+                String email= emailEditText.getText().toString();
 
                 UpdateUser user= new UpdateUser(id,name,phone,email);
                 contactViewModel.updateInfo(user);
