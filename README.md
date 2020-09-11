@@ -5,6 +5,9 @@
 # Project Structure
 ![mvvm](https://user-images.githubusercontent.com/48696824/89740928-16826e00-daaf-11ea-88f9-62e505a077f5.PNG)
 
+# Database Design
+![Database Design](https://user-images.githubusercontent.com/48696824/92965096-ffacae00-f496-11ea-840a-c5877a2a9976.jpg)
+
 # Using Component 
 01. Architecture Component: MVVM
 02. View Model
